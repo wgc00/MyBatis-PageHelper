@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--jdbc 驱动包，等-->
+    <!--<classPathEntry location="/Program Files/IBM/SQLLIB/java/db2java.zip" />-->
+
+    <!--使用外部文件-->
+    <properties resource="jdbc.properties"/>
+
+    <context id="sss" targetRuntime="MyBatis3Simple">
+        <!--去掉自动生成的注解-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库连接-->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.user}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <!--entity-->
+        <javaModelGenerator targetPackage="com.wgc.pageHelper.entity" targetProject="${entityAndDAOPath}">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--sql-->
+        <sqlMapGenerator targetPackage="mappers"  targetProject="${mappersPath}">
+        </sqlMapGenerator>
+        <!--dao-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wgc.pageHelper.dao"  targetProject="${entityAndDAOPath}">
+        </javaClientGenerator>
+
+        <!--表-->
+        <table tableName="directories">
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
